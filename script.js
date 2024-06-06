@@ -1,4 +1,12 @@
 let resultsContainer = document.getElementsByClassName("container")[0]
+let debounceTimeout;
+
+const debounce = (func, delay) => {
+    return function(...args) {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => func.apply(this, args), delay);
+    };
+};
 
 const validateInput = (el) => {
     if(el.value === ""){
@@ -35,3 +43,5 @@ const generateResults = (searchValue, inputField) => {
         }
     })
 }
+
+const debounceValidateInput = debounce(validateInput, 300);
